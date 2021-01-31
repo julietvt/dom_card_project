@@ -1,0 +1,28 @@
+#userList {
+  margin: 0 auto;
+  max-width: 1200px;
+  background-color: silver;
+}
+
+.userCardWrapper {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.userImageContainer {
+  position: relative;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+}
+
+.userImage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: inherit;
+  width: inherit;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+}
