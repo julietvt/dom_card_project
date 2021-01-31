@@ -25,39 +25,37 @@ users.forEach((user) => {
   userListElem.append(createUserListElem(user));
 });
 
-function createUserListElem(user) {
-  // создание нового элемента списка
-  const userListItemElem = document.createElement('li');
-
-  // контейнер для карточки/ новая карточка
-  const userCardWrapperElem = document.createElement('div');
-  //userCardWrapperElem.setAttribute("class","userCardWrapper");
-  userCardWrapperElem.classList.add('userCardWrapper');
-
-  // контейнер для изображения пользователя
+function createUserImageElem({ imageSrc }) {
   const userImageContainerElem = document.createElement('div');
   userImageContainerElem.classList.add('userImageContainer');
-
-  // само изображение пользователя
   const userImageElem = document.createElement('img');
   userImageElem.classList.add('userImage');
   userImageElem.setAttribute('src', user.imageSrc);
   userImageElem.setAttribute('alt', 'user photo');
-
-  // присоединяем изображение в контейнер изображения
   userImageContainerElem.append(userImageElem);
-  // присоединяем контейнер фото в карточку
-  userCardWrapperElem.append(userImageContainerElem);
+  return userImageContainerElem;
+}
 
-  // создание fullname
+function createUserFullNameElem({ name, surname }) {
   const userFullNameElem = document.createElement('h1');
-  userFullNameElem.innerText = `${user.name} ${user.surname}`;
-  userCardWrapperElem.append(userFullNameElem);
+  userFullNameElem.innerText = `${name} ${surname}`;
+  return userFullNameElem;
+}
 
+//создание 1 новой карточки
+function createUserCardElem(user) {
+  const userCardWrapperElem = document.createElement('div');
+  userCardWrapperElem.classList.add('userCardWrapper');
+  userCardWrapperElem.append(createUserImageElem(user));
+  userCardWrapperElem.append(createUserFullNameElem(user));
+}
+
+function createUserListElem(user) {
+  // создание нового элемента списка
+  const userListItemElem = document.createElement('li');
   // присоединяем карточку в li
-  userListItemElem.append(userCardWrapperElem);
+  userListItemElem.append(createUserCardElem(user));
   // устанавливаем новый атрибут для li <li id=1></li>
   userListItemElem.setAttribute('id', user.id);
-
   return userListItemElem;
 }
